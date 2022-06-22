@@ -3,22 +3,23 @@ import LogoImg from "../resources/loginImg.png";
 import goGlocal from "../resources/GoGlocalBrandlogo.png";
 import signInLogo from "../resources/Sign in.png";
 import "./signIn.css";
+import { NavLink } from "react-router-dom";
 
 function SignIn() {
 	return (
 		<div>
 			<div class="loginBody">
-				<div style={{"width":"50%"}}>
+				<div style={{ width: "50%" }}>
 					<img id="login-bg-img" src={LogoImg}></img>
 				</div>
-				<div style={{marginLeft:"10rem"}}>
+				<div style={{ marginLeft: "10rem" }}>
 					<div>
 						<img src={goGlocal}></img>
 					</div>
 					<div>
 						<img src={signInLogo} class="signIn-txt"></img>
 					</div>
-					<div style={{width: "100%"}}>
+					<div style={{ width: "100%" }}>
 						<form>
 							<div class="form-group field-inputs">
 								<input
@@ -38,11 +39,21 @@ function SignIn() {
 									placeholder="password"
 								/>
 							</div>
-
-							<div class="button-div">
-								<button class="signIn-btn">Sign In</button>
-								<a href="" style={{ float: "right", fontSize:"90%", marginTop:"1rem" }}>Forgot Password ?</a>
-							</div>
+							<NavLink to="/profile">
+								<div class="button-div">
+									<button class="signIn-btn">Sign In</button>
+									<a
+										href=""
+										style={{
+											float: "right",
+											fontSize: "90%",
+											marginTop: "1rem",
+										}}
+									>
+										Forgot Password ?
+									</a>
+								</div>
+							</NavLink>
 						</form>
 					</div>
 				</div>

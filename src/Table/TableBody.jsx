@@ -1,9 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import RowItem from './RowItem'
 import "./table.css"
+var axios = require('axios');
+var data = '';
 
 // class="shadow p-3 mb-5 bg-white rounded "
 function TableBody() {
+
+  const [tickets, setTickets] = useState(null);
+
+	var config = {
+		method: "get",
+		url: "http://52.66.72.109/ticket",
+		headers: {},
+		data: data,
+	};
+
+	useEffect( () => {
+		axios(config)
+		.then(function (response) {
+			setTickets(response.data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	})
+	
+	if(!tickets)
+      return(
+        <div>
+			
+        </div>
+      )
+
   return (
     <table id="list-Table" class="table">
     <thead class="table-head-acc-manager">
@@ -19,10 +48,12 @@ function TableBody() {
         </tr>
     </thead>
 
-    <RowItem id="ZS3828" date="April 1, 2022" company = "CCD" sellerID = "2789" module="General" details="How to carry On?" status="Resolved"/>
-    <RowItem id="ZS3828" date="April 1, 2022" company = "CCD" sellerID = "2789" module="General" details="How to carry On?" status="Resolved"/>
-    <RowItem id="ZS3828" date="April 1, 2022" company = "CCD" sellerID = "2789" module="General" details="How to carry On?" status="Resolved"/>
-    <RowItem id="ZS3828" date="April 1, 2022" company = "CCD" sellerID = "2789" module="General" details="How to carry On?" status="Resolved"/>
+    {tickets.map( (ticket) => {
+      return <RowItem id = {ticket.ticket_id} date={ticket.issue_date} sellerID = {ticket.seller_id} module={ticket.module} details={ticket.description} status={ticket.status}/>
+    })}
+    
+    {/* <RowItem id="ZS3828" date="April 1, 2022" company = "CCD" sellerID = "2789" module="General" details="How to carry On?" status="Resolved"/> */}
+    
     </table>
   )
 }

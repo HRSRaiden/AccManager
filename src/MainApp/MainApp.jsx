@@ -3,7 +3,9 @@ import AppBody from '../AppBody';
 import Sidebar from '../Sidebar/Sidebar';
 import "./mainApp.css"
 
-function MainApp() {
+function MainApp(prop) {
+  console.log(prop.screen);
+
   return (
     <div id="viewport">
         <Sidebar />
@@ -11,7 +13,7 @@ function MainApp() {
         <div id="content">
           <div class="container-fluid" >
             <div class="content-area">
-              <AppBody />
+              <AppBody screen={prop.screen}/>
             </div>
           </div>
         </div>

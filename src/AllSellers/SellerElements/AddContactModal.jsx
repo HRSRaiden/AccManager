@@ -16,6 +16,7 @@ function AddContactModal() {
 						<div style={{ width: "100%", display:"flex", justifyContent:"center" }}> <p>Add Contact</p> </div>
 						
 						<div style={{ width: "100%", display:"flex", justifyContent:"center" }}>
+						
 						<form style={{ width: "100%" }}>
 							<div>
 								<input placeholder="Name" className="add-contact-input" />

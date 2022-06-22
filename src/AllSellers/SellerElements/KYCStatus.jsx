@@ -14,21 +14,7 @@ function KYCStatus(prop) {
         <p>{prop.level}</p>
     </div>
   )
-
-  // function checkStatus()
-  // {
-  //   // document.getElementById("kyc-indicator").style.backgroundColor = "#5EAA22";
-  //   if(prop.status === "done")
-  //   {
-  //     setFlag(1);
-  //     document.getElementById("kyc-indicator").style.backgroundColor = "#5EAA22";
-  //   }
-
-  //   else
-  //   setFlag(0);
-
-  //   console.log(document.getElementById("kyc-indicator"));
-  // }
+  
 }
 
 export default KYCStatus

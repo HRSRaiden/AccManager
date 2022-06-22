@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./table.css"
+var axios = require('axios');
+var data = '';
+
+// Seller Data is being loaded here so that company name of the corresponding Ticket can be filled
 
 function RowItem(prop) {
+	
+	const [seller, setSeller] = useState(null);
+
+	var config = {
+		method: 'get',
+		url: 'http://52.66.72.109/seller/s123',
+		headers: { },
+		data : data
+	  };
+
+	useEffect( () => {
+		axios(config)
+		.then(function (response) {
+		  
+			setSeller(response.data);
+		})
+		.catch(function (error) {
+		  console.log(error);
+		});
+	}, [])
+
+	if(!seller)
+	{
+		return ( <div>
+			Loading .....
+		</div>)
+	}
+
 	return (
 		<tbody id="row-item-body" style={{boxShadow:"0px 4px 10px rgba(0, 0, 0, 0.1)", borderRadius:"12px"}}>
 			<tr id="list-body">
@@ -12,7 +44,7 @@ function RowItem(prop) {
                 <p class="non-img-col">{prop.date}</p>
 				</td>
 				<td>
-					<p class="non-img-col">{prop.company}</p>
+					<p class="non-img-col">{seller.company_name}</p>
 				</td>
 				<td>
 					<p class="non-img-col">{prop.sellerID}</p>

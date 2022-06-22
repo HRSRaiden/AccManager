@@ -1,7 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../profile.css";
+var axios = require("axios");
+var data = "";
 
-function EditProfileBody() {
+function EditProfileBody( { match }) {
+
+	
+	var config = {
+		method: "get",
+		url: "http://52.66.72.109/account/profiles/3",
+		headers: {},
+		data: data,
+	};
+
+	const [account, setAccount] = useState(null);
+
+	useEffect(() => {
+		axios(config)
+			.then(function (response) {
+				console.log(JSON.stringify(response.data));
+				setAccount(response.data);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, []);
+	
+	if(!account)
+	{
+		return (
+			<div>
+				Loading ....
+			</div>
+		)
+	}
+
+	function updateInfo()
+	{
+		var fname = document.getElementById("inputName").value;
+		console.log(fname);
+		var fdob = document.getElementById("inputdob").value;
+		console.log(fdob);
+		var femail = document.getElementById("inputEmail").value;
+		console.log(femail);
+		var fnum = document.getElementById("inputNumber").value;
+		console.log(fnum);
+		var fcomp = document.getElementById("inputCompany").value;
+		console.log(fcomp);
+
+		var data2 = `{\r\n "account_id": ${account.id},\r\n  "mobile_number": ${fnum},\r\n  "name": ${fname},\r\n  "dob": ${fdob},\r\n  "email": ${femail},\r\n  "two_step_auth": true\r\n}`;
+
+		var config = {
+		method: 'put',
+		url: 'http://52.66.72.109/account/profiles/update/3/',
+		headers: { },
+		data : data2
+		};
+
+		axios(config)
+		.then(function (response) {
+		console.log(JSON.stringify(response.data));
+		})
+		.catch(function (error) {
+		console.log(error);
+		});
+	}
+
 	return (
 		<div style={{ fontFamily: "poppins" }}>
 			<div class="above-navbar">
@@ -30,8 +94,8 @@ function EditProfileBody() {
 							<input
 								type="text"
 								class="form-control"
-								id="exampleInputEmail1"
-								defaultValue="Danta Tojeing"
+								id="inputName"
+								defaultValue={account.name}
 								aria-describedby="emailHelp"
 								style={{ fontSize: "110%" }}
 							/>
@@ -43,7 +107,7 @@ function EditProfileBody() {
 							<input
 								type="text"
 								class="form-control"
-								id="exampleInputEmail1"
+								id="inputLastname"
 								defaultValue="Harimaku"
 								aria-describedby="emailHelp"
 								style={{ fontSize: "110%" }}
@@ -56,9 +120,10 @@ function EditProfileBody() {
 							<input
 								type="date"
 								class="form-control"
-								id="exampleInputEmail1"
+								id="inputdob"
 								aria-describedby="emailHelp"
 								style={{ fontSize: "110%" }}
+								defaultValue={account.dob}
 							/>
 						</div>
 						<div class="mb-3">
@@ -68,9 +133,9 @@ function EditProfileBody() {
 							<input
 								type="email"
 								class="form-control"
-								id="exampleInputEmail1"
+								id="inputEmail"
 								aria-describedby="emailHelp"
-								defaultValue="Harimaku@gmail.com"
+								defaultValue={account.email}
 								style={{ fontSize: "110%" }}
 							/>
 						</div>
@@ -83,8 +148,8 @@ function EditProfileBody() {
 							<input
 								type="number"
 								class="form-control"
-								id="exampleInputPassword1"
-								defaultValue="209921990"
+								id="inputNumber"
+								defaultValue={account.mobile_number}
 								style={{ fontSize: "110%" }}
 							/>
 						</div>
@@ -95,7 +160,7 @@ function EditProfileBody() {
 							<input
 								type="text"
 								class="form-control"
-								id="exampleInputEmail1"
+								id="inputCompany"
 								defaultValue="Sprinter"
 								aria-describedby="emailHelp"
 								style={{ fontSize: "110%" }}
@@ -114,7 +179,7 @@ function EditProfileBody() {
 					</label>
 				</div>
 
-				<button type="submit" class="btn btn-primary" id="edit-profile-save-btn" style={{marginTop:"5%"}}>
+				<button type="submit" class="btn btn-primary" id="edit-profile-save-btn" style={{marginTop:"5%"}} onClick={updateInfo}>
 					Submit
 				</button>
 			</form>

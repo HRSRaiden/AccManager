@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SellerEle.css";
 import TicketListData from "./TicketListData";
+var axios = require("axios");
+var data = "";
 
-function TicketList() {
+function TicketList(prop) {
+
+	const [tickets, setTickets] = useState(null);
+
+	var config = {
+		method: "get",
+		url: "http://52.66.72.109/ticket",
+		headers: {},
+		data: data,
+	};
+
+	useEffect( () => {
+		axios(config)
+		.then(function (response) {
+			setTickets(response.data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	})
+	
+	if(!tickets)
+      return(
+        <div>
+			
+        </div>
+      )
+
 	return (
 		<div>
 			<div style={{ color: "#646464", fontSize: "90%" }}>
@@ -13,15 +42,24 @@ function TicketList() {
 					<th class="table-card-heading">Ticket List</th>
 					<th class="table-card-heading">Date</th>
 					<th class="table-card-heading">Company Rep</th>
-          <th class="table-card-heading">Module</th>
-          <th class="table-card-heading">Comment</th>
+					<th class="table-card-heading">Module</th>
+					<th class="table-card-heading">Comment</th>
 				</tr>
-				
-        <TicketListData id="ZS38238" date="April 1, 2021" compRep="Project Manager" module="Marketplace Integration" comment="None"/>
-        <TicketListData id="ZS38238" date="April 1, 2021" compRep="Project Manager" module="Marketplace Integration" comment="None"/>
-        <TicketListData id="ZS38238" date="April 1, 2021" compRep="Project Manager" module="Marketplace Integration" comment="None"/>
-        <TicketListData id="ZS38238" date="April 1, 2021" compRep="Project Manager" module="Marketplace Integration" comment="None"/>
-        <TicketListData id="ZS38238" date="April 1, 2021" compRep="Project Manager" module="Marketplace Integration" comment="None"/>
+
+				{tickets.map( (ticket) => {
+					if(ticket.seller_id == prop.id)
+					{
+						return <TicketListData ticketId = {ticket.ticket_id}/>
+					}
+				})}
+
+				{/* <TicketListData
+					id="ZS38238"
+					date="April 1, 2021"
+					compRep="Project Manager"
+					module="Marketplace Integration"
+					comment="None"
+				/> */}
 			</table>
 		</div>
 	);
