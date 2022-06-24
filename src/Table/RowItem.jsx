@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./table.css"
+import { NavLink } from "react-router-dom";
+
 var axios = require('axios');
 var data = '';
 
@@ -38,7 +40,9 @@ function RowItem(prop) {
 		<tbody id="row-item-body" style={{boxShadow:"0px 4px 10px rgba(0, 0, 0, 0.1)", borderRadius:"12px"}}>
 			<tr id="list-body">
 				<th scope="row ">
+				<NavLink to= {`/allTickets/ticket/${prop.id}`} style={{color:"black"}}>
 					<p class="non-img-col">{prop.id}</p>
+				</NavLink>
 				</th>
 				<td>
                 <p class="non-img-col">{prop.date}</p>

@@ -48,12 +48,14 @@ function EditProfileBody( { match }) {
 		var fcomp = document.getElementById("inputCompany").value;
 		console.log(fcomp);
 
-		var data2 = `{\r\n "account_id": ${account.id},\r\n  "mobile_number": ${fnum},\r\n  "name": ${fname},\r\n  "dob": ${fdob},\r\n  "email": ${femail},\r\n  "two_step_auth": true\r\n}`;
+		var data2 = `{\r\n  "mobile_number": "${fnum}",\r\n  "name": "${fname}",\r\n  "dob": "${fdob}",\r\n  "email": "${femail}",\r\n  "two_step_auth": true\r\n}`;
 
 		var config = {
 		method: 'put',
 		url: 'http://52.66.72.109/account/profiles/update/3/',
-		headers: { },
+		headers: {
+			
+		},
 		data : data2
 		};
 

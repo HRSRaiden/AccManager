@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ContactTableData from "./ContactTableData";
 import "./TicketEle.css"
+var axios = require('axios');
+var data = '';
 
-function ContactCards() {
+function ContactCards(prop) {
+
+	
+	var config = {
+	method: 'get',
+	url: 'http://52.66.72.109/seller/contacts',
+	headers: { },
+	data : data
+	};
+
+	const [contacts, setContacts] = useState(null);
+
+	useEffect( () => {
+		axios(config)
+		.then(function (response) {
+			setContacts(response.data)
+		})
+		.catch(function (error) {
+		console.log(error);
+		});
+	})
+	
+	if(!contacts)
+	{
+		return (
+			<div>
+				Loading ......
+			</div>
+		)
+	}
+
 	return (
 		<div>
 			<div style={{color: "#646464", fontSize:"90%"}}>Contact Cards</div>
@@ -12,10 +44,12 @@ function ContactCards() {
 					<th class="table-card-heading">Contact</th>
 					<th class="table-card-heading">Designation</th>
 				</tr>
-				<ContactTableData name="Alfred Noble" contact="9021938214" desig="HR Manager"/>
-                <ContactTableData name="Alfred Noble" contact="9021938214" desig="HR Manager"/>
-                <ContactTableData name="Alfred Noble" contact="9021938214" desig="HR Manager"/>
-                <ContactTableData name="Alfred Noble" contact="9021938214" desig="HR Manager"/>
+
+				{contacts.map( (contact) => {
+                    if(contact.seller_id == prop.seller_id)
+                        return ( <ContactTableData name={contact.name} contact={contact.mobile_number} desig={contact.designation}/>);
+                }) }
+				
 			</table>
 		</div>
 	);

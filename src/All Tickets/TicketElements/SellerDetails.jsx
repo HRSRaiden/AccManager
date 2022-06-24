@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function SellerDetails() {
+var axios = require('axios');
+var data = '';
+
+
+
+function SellerDetails(prop) {
+
+	var config = {
+		method: 'get',
+		url: `http://52.66.72.109/seller/${prop.sellerId}`,
+		headers: { },
+		data : data
+	  };
+	  
+	  const [seller, setSeller] = useState(null);
+
+	  useEffect( () => {
+		axios(config)
+	  .then(function (response) {
+		setSeller(response.data);
+	  })
+	  .catch(function (error) {
+		console.log(error);
+	  });
+	  }, [])
+
+	  if(!seller)
+    {
+        return (
+            <div>
+                Loading......
+            </div>
+        )
+    }
+	
 	return (
 		<div id="Seller-detials-box">
 			<div id="detail-Heading">
@@ -14,19 +48,19 @@ function SellerDetails() {
 			<div style={{ margin: "auto 2% 2% 2%" }}>
 				<div style={{ display: "flex", justifyContent: "left" }}>
 					<p class="label-heads">
-						Company Name : <span class="lable-content">ABC Ltd.</span>
+						Company Name : <span class="lable-content">{seller.company_name}</span>
 					</p>
 					<p class="label-heads">
 						Company Representative :{" "}
-						<span class="lable-content">Madhav Singh</span>
+						<span class="lable-content">{prop.compRep}</span>
 					</p>
 					<p class="label-heads">
-						Company e-mail : <span class="lable-content">company@gmail</span>
+						Company e-mail : <span class="lable-content">{seller.company_mail}</span>
 					</p>
 				</div>
 
 				<div class="label-heads" style={{ paddingBottom: "1%" }}>
-					Comapny Contact : <span class="lable-content">9971423685</span>
+					Comapny Contact : <span class="lable-content">{prop.mobile}</span>
 				</div>
 			</div>
 		</div>
