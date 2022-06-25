@@ -54,11 +54,7 @@ function EditProfileBody( { match }) {
 		method: 'put',
 		url: 'http://52.66.72.109/account/profiles/update/3/',
 		headers: {
-<<<<<<< HEAD
-			
-=======
 			"Content-Type": "application/json",
->>>>>>> 3d690f3da0598c1fcb16cb3951c2e1a1e1e49ff8
 		},
 		data : data2
 		};

@@ -7,6 +7,7 @@ import HistoryOfTicket from './TicketElements/HistoryOfTicket'
 import SellerDetails from './TicketElements/SellerDetails'
 import TicketDetails from './TicketElements/TicketDetails'
 import {useParams} from 'react-router-dom'
+import TakeActionModal from './TicketElements/TakeActionModal'
 
 // Note: The CSS of its div are in heading.css
 
@@ -71,8 +72,9 @@ function Tickets() {
                 <HistoryOfTicket id={ticket.ticket_id}/>
             </div>
             <div style={{marginTop:"5%", marginBottom:"5%"}}>
-                <button class="take-action-btn">Take Action</button>
+                <button class="take-action-btn" data-toggle="modal" data-target="#takeAction-pop">Take Action</button>
             </div>
+            <TakeActionModal id={ticket.ticket_id} />
     </div>
   )
 }
