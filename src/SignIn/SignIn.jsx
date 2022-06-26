@@ -4,22 +4,66 @@ import goGlocal from "../resources/GoGlocalBrandlogo.png";
 import signInLogo from "../resources/Sign in.png";
 import "./signIn.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import { mobile_no, setPrimary, acc_id, setId } from "../UserContants";
+
 var axios = require('axios');
 var data = '';
-
+var data2 = '';
 
 
 function SignIn() {
 
 	const[mob,setMob] = useState("");
 	const[password, setPassword] = useState("");
-	const [accList, setList] = useState([]);
+	
 	
 	var isLogged = false;
 
 	var list;
+	var profiles;
 
 	const navigate = useNavigate();
+
+	function searchID()
+	{
+		console.log("Searching Started")
+
+		profiles.map((prof) => {
+
+			if(prof.mobile_number == mobile_no)
+			{
+				console.log("Account Identified")
+				// console.log(prof.account_id)
+				setId(prof.account_id)
+			}
+		})
+
+		console.log("Account Id = " + acc_id)
+	}
+
+	function retrieve()
+	{
+		console.log("retrieve Entered");
+
+		var config = {
+			method: 'get',
+			url: 'http://52.66.72.109/account/profiles',
+			headers: { },
+			data : data2
+		  };
+		  
+		  axios(config)
+		  .then(function (response) {
+			// console.log("reception success");
+			console.log(response.data);
+			profiles = response.data;
+			searchID();
+
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+	}
 
 	function doWork()
 	{
@@ -30,16 +74,18 @@ function SignIn() {
 
 		list.map( (x) =>
 		{
-			if(x.mobile_number === mob)
+			if(x.mobile_number === mob && x.password === password)
 			{
 				navigate('/profile');
 				console.log("User Matched")
 				isLogged = true;
+				setPrimary(mob)
+				retrieve();
 			}
 			
 		})
 
-		console.log(isLogged);
+		console.log("Mobile = " + mobile_no);
 
 		if(!isLogged)
 		{

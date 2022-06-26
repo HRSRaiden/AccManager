@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import UserInfo from "./UserInfo";
 import "./profile.css";
 import { NavLink } from "react-router-dom"; 
+import { mobile_no, setPrimary, acc_id, setId } from "../UserContants";
+
 var axios = require("axios");
 var data = "";
 
+
 function ProfileBody() {
-	
+
 	var config = {
 		method: "get",
-		url: "http://52.66.72.109/account/profiles/3",
+		// url: "http://52.66.72.109/account/profiles/3",
+		url: `http://52.66.72.109/account/profiles/${acc_id}`,
 		headers: {},
 		data: data,
 	};
