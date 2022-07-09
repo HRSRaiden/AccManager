@@ -9,7 +9,7 @@ function ContactCards(prop) {
 	
 	var config = {
 	method: 'get',
-	url: 'http://52.66.72.109/seller/contacts',
+	url: 'https://65.0.204.216/am/sellers/contacts/',
 	headers: { },
 	data : data
 	};

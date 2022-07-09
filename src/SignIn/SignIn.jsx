@@ -47,22 +47,22 @@ function SignIn() {
 
 		var config = {
 			method: 'get',
-			url: 'http://52.66.72.109/account/profiles',
+			url: 'https://65.0.204.216/am/profiles/',
 			headers: { },
 			data : data2
-		  };
-		  
-		  axios(config)
-		  .then(function (response) {
+		};
+		
+		axios(config)
+		.then(function (response) {
 			// console.log("reception success");
 			console.log(response.data);
 			profiles = response.data;
 			searchID();
 
-		  })
-		  .catch(function (error) {
+		})
+		.catch(function (error) {
 			console.log(error);
-		  });
+		});
 	}
 
 	function doWork()
@@ -101,7 +101,7 @@ function SignIn() {
 
 		var config = {
 			method: 'get',
-			url: 'http://52.66.72.109/account',
+			url: 'https://65.0.204.216/am/',
 			headers: { },
 			data : data
 		  };

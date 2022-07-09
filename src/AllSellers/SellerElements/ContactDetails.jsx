@@ -7,30 +7,29 @@ var axios = require("axios");
 var data = "";
 
 function ContactDetails(prop) {
-	
+
 	var config = {
 		method: "get",
-		url: "http://52.66.72.109/seller/contacts",
+		url: "https://65.0.204.216/am/sellers/contacts/",
 		headers: {},
 		data: data,
 	};
 
 	const [contact, setContact] = useState(null);
 
-	useEffect( () => {
+	useEffect(() => {
 		axios(config)
-		.then(function (response) {
-			
-			setContact(response.data);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+			.then(function (response) {
+
+				setContact(response.data);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}, [])
-	
-	if(!contact)
-	{
-		return(
+
+	if (!contact) {
+		return (
 			<div>
 				Please Wait .......
 			</div>
@@ -67,10 +66,9 @@ function ContactDetails(prop) {
 					<th class="table-card-heading">Notes</th>
 				</tr>
 
-				{contact.map( (item) => {
-					
-					if(prop.id == item.seller_id)
-					{
+				{contact.map((item) => {
+
+					if (prop.id == item.seller_id) {
 						return <ContactData name={item.name} desig={item.designation} mobile={item.mobile_number} email={item.email} notes={item.notes} />
 					}
 
@@ -83,7 +81,7 @@ function ContactDetails(prop) {
 					email="HR Manager"
 					notes="lorem ipsum dolor sit amet.."
 				/> */}
-				
+
 			</table>
 		</div>
 	);
