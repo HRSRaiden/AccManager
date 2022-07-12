@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { acc_id } from "../../UserContants";
 import "../profile.css";
 var axios = require("axios");
 var data = "";
 
-function EditProfileBody( { match }) {
+function EditProfileBody({ match }) {
 
-	
 	var config = {
 		method: "get",
-		url: "http://52.66.72.109/account/profiles/3",
+		url: `https://65.0.204.216/am/profiles/${acc_id}/`,
 		headers: {},
 		data: data,
 	};
@@ -25,9 +25,8 @@ function EditProfileBody( { match }) {
 				console.log(error);
 			});
 	}, []);
-	
-	if(!account)
-	{
+
+	if (!account) {
 		return (
 			<div>
 				Loading ....
@@ -35,8 +34,7 @@ function EditProfileBody( { match }) {
 		)
 	}
 
-	function updateInfo()
-	{
+	function updateInfo() {
 		var fname = document.getElementById("inputName").value;
 		console.log(fname);
 		var fdob = document.getElementById("inputdob").value;
@@ -48,24 +46,24 @@ function EditProfileBody( { match }) {
 		var fcomp = document.getElementById("inputCompany").value;
 		console.log(fcomp);
 
-		var data2 = `{\r\n  "mobile_number": "${fnum}",\r\n  "name": "${fname}",\r\n  "dob": "${fdob}",\r\n  "email": "${femail}",\r\n  "two_step_auth": true\r\n}`;
+		var data2 = `{\r\n  "mobile_number": ${fnum},\r\n  "name": "${fname}",\r\n  "dob": "${fdob}",\r\n  "email": "${femail}",\r\n  "two_step_auth": true\r\n}`;
 
 		var config = {
-		method: 'put',
-		url: 'http://52.66.72.109/account/profiles/update/3/',
-		headers: {
-			"Content-Type": "application/json",
-		},
-		data : data2
+			method: 'put',
+			url: `https://65.0.204.216/am/profiles/update/${acc_id}/`,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			data: data2
 		};
 
 		axios(config)
-		.then(function (response) {
-		console.log(JSON.stringify(response.data));
-		})
-		.catch(function (error) {
-		console.log(error);
-		});
+			.then(function (response) {
+				console.log(JSON.stringify(response.data));
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	return (
@@ -84,7 +82,7 @@ function EditProfileBody( { match }) {
 				></img>
 			</div>
 
-			<form style={{ marginTop: "5%", marginBottom:"5%" }}>
+			<form style={{ marginTop: "5%", marginBottom: "5%" }}>
 				<div
 					style={{ display: "flex", justifyContent: "left", fontSize: "75%" }}
 				>
@@ -171,8 +169,8 @@ function EditProfileBody( { match }) {
 					</div>
 				</div>
 
-				<div style={{marginTop:"5%"}}>
-					<span style={{ marginRight: "3%", fontSize:"85%" }}>
+				<div style={{ marginTop: "5%" }}>
+					<span style={{ marginRight: "3%", fontSize: "85%" }}>
 						Two Step Authentication Process:
 					</span>
 					<label class="switch">
@@ -181,7 +179,7 @@ function EditProfileBody( { match }) {
 					</label>
 				</div>
 
-				<button type="submit" class="btn btn-primary" id="edit-profile-save-btn" style={{marginTop:"5%"}} onClick={updateInfo}>
+				<button type="submit" class="btn btn-primary" id="edit-profile-save-btn" style={{ marginTop: "5%" }} onClick={updateInfo}>
 					Submit
 				</button>
 			</form>

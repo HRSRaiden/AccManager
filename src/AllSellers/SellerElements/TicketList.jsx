@@ -10,7 +10,7 @@ function TicketList(prop) {
 
 	var config = {
 		method: "get",
-		url: "http://52.66.72.109/ticket",
+		url: "https://65.0.204.216/am/tickets/",
 		headers: {},
 		data: data,
 	};

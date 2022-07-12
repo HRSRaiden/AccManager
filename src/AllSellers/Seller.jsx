@@ -4,44 +4,44 @@ import Heading from "../Heading/Heading";
 import CompanyDetails from "./SellerElements/CompanyDetails";
 import ContactDetails from "./SellerElements/ContactDetails";
 import TicketList from "./SellerElements/TicketList";
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 var axios = require('axios');
 var data = '';
 
 function Seller(prop) {
-	
+
 	const { id } = useParams();
-	console.log(id);
+	// console.log(id);
 
 	var config = {
 		method: 'get',
-		url: `http://52.66.72.109/seller/${id}`,
-		headers: { },
-		data : data
-	  };
-	  
-	  const [seller, setSeller] = useState(null);
+		url: `https://65.0.204.216/am/sellers/${id}/`,
+		headers: {},
+		data: data
+	};
 
-	  useEffect( () => {
-		
+	const [seller, setSeller] = useState(null);
+
+	useEffect(() => {
+
 		axios(config)
-		.then(function (response) {
-		  setSeller(response.data);
-		})
-		.catch(function (error) {
-		  console.log(error);
-		});
+			.then(function (response) {
+				setSeller(response.data);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 
-	  })
-	  
-	
-	if(!seller)
-	  return (
-		<div>
-			Please Wait ......
-		</div>
-	  )
-	
+	})
+
+
+	if (!seller)
+		return (
+			<div>
+				Please Wait ......
+			</div>
+		)
+
 	return (
 		<div>
 			<div class="above-navbar">
@@ -52,13 +52,13 @@ function Seller(prop) {
 			<AccNavbar title="Home / All Sellers / Sellers" />
 
 			<div style={{ marginTop: "5%" }}>
-				<CompanyDetails compName={seller.company_name} compaddr={seller.company_address} category={seller.company_category} web={seller.website} mob={seller.contact} email={seller.company_mail} date={seller.date_of_onboarding} kyc={seller.kyc}/>
+				<CompanyDetails compName={seller.company_name} compaddr={seller.company_address} category={seller.company_category} web={seller.website} mob={seller.contact} email={seller.company_mail} date={seller.date_of_onboarding} kyc={seller.kyc} />
 			</div>
 			<div style={{ marginTop: "5%" }}>
-				<ContactDetails id={seller.seller_id}/>
+				<ContactDetails id={seller.seller_id} />
 			</div>
 			<div style={{ marginTop: "5%", marginBottom: "5%" }}>
-				<TicketList id={seller.seller_id}/>
+				<TicketList id={seller.seller_id} />
 			</div>
 		</div>
 	);

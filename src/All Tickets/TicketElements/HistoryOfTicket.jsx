@@ -8,7 +8,7 @@ function HistoryOfTicket(prop) {
   
   var config = {
     method: 'get',
-    url: 'http://52.66.72.109/ticket/history',
+    url: 'https://65.0.204.216/am/tickets/history/',
     headers: { },
     data : data
   };

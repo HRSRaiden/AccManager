@@ -2,8 +2,8 @@ import React from 'react'
 import "./SellerEle.css"
 
 function ContactData(props) {
-  return (
-    <tr class="contact-card-table-row">
+	return (
+		<tr class="contact-card-table-row">
 			<td class="contact-card-table-data" style={{ color: "#646464" }}>
 				{props.name}
 			</td>
@@ -20,7 +20,7 @@ function ContactData(props) {
 				{props.notes}
 			</td>
 		</tr>
-  )
+	)
 }
 
 export default ContactData

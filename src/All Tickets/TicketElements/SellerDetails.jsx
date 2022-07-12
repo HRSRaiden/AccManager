@@ -9,32 +9,31 @@ function SellerDetails(prop) {
 
 	var config = {
 		method: 'get',
-		url: `http://52.66.72.109/seller/${prop.sellerId}`,
-		headers: { },
-		data : data
-	  };
-	  
-	  const [seller, setSeller] = useState(null);
+		url: `https://65.0.204.216/am/sellers/${prop.sellerId}/`,
+		headers: {},
+		data: data
+	};
 
-	  useEffect( () => {
+	const [seller, setSeller] = useState(null);
+
+	useEffect(() => {
 		axios(config)
-	  .then(function (response) {
-		setSeller(response.data);
-	  })
-	  .catch(function (error) {
-		console.log(error);
-	  });
-	  }, [])
+			.then(function (response) {
+				setSeller(response.data);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, [])
 
-	  if(!seller)
-    {
-        return (
-            <div>
-                Loading......
-            </div>
-        )
-    }
-	
+	if (!seller) {
+		return (
+			<div>
+				Loading......
+			</div>
+		)
+	}
+
 	return (
 		<div id="Seller-detials-box">
 			<div id="detail-Heading">
